@@ -1,6 +1,25 @@
 const express = require("express");
 const app = express();
+const mysql = require("promise-mysql2");
 
+mysql
+  .createConnection({
+    user: 'root',
+    password: '',
+  })
+  .then((connection) => {
+    connection
+      .query("CREATE DATABASE IF NOT EXISTS réso;")
+      .then(() => {
+        
+        try {
+          
+        } catch {
+          throw error;
+        }
+      })
+      .catch((error) => console.log({ message: "erreur base de données" }));
+  });
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader(
@@ -14,4 +33,5 @@ app.use((req, res, next) => {
     next();
   });
 
+  
   module.exports = app;
